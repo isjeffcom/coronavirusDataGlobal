@@ -7,6 +7,30 @@ Coronavirus Global Data Collector and API<br>
 This is sub-project for better understanding, analysis and visualize COVID-19 data in the UK.<br>
 Main Project: https://github.com/isjeffcom/coronvirusFigureUK
 
+# API List
+
+HTTP GET: 
+http://global.covid19uk.live
+
+### Parameter
+`/current`: Get Latest Global Data <br>
+`/data?date=<YYYY-MM-DD>`: Search data by date <br>
+`/data?country=<COUNTRY>`: Search data in country level <br>
+`/data?date=<YYYY-MM-DD>&country=<COUNTRY>`: Search data by date and country <br>
+`/data?place=<PROVINCE>`: Search data in province level <br>
+`/data?date=<YYYY-MM-DD>&place=<PROVINCE>`: Search data by date and province <br>
+
+Standard date format: YYYY-MM-DD
+
+### Countries and Provinces list
+The full countries and provinces list in in `/list`, however, as the data is keep updating, run those 2 js scripts eg. `node country.js` can generate a new list. 
+
+<b>Be aware</b><br>
+China Mainland == Mainland China <br>
+PRC Hong Kong == Hong Kong <br>
+PRC Macau == Macau <br>
+ROC Taiwan (China) == Taiwan <br>
+
 # Important
 The data collection code in init.py -> main() needs to fit the CSV data format published by JH CSSE. As they have changed data format for 3 times, and maybe more for the future. The script needs to constantly monitor and change if any changed. 
 
@@ -26,40 +50,13 @@ That's it, you have global covid-19 data in your database `history` table and ca
 
 The server will running at: `http://localhost:8003`
 
-
 ### Update
 <b>excute `python update.py`</b><br><br>
 You can set up a timer for this by `corn` or `node-schedule`, maybe any, once a day
 
-# API Query List
-
-`/`: Default api, output cached data from data/data.json <br>
-`/current`: Get Latest Global Data <br>
-`/data?date=<YYYY-MM-DD>`: Search data by date <br>
-`/data?country=<COUNTRY>`: Search data in country level <br>
-`/data?date=<YYYY-MM-DD>&country=<COUNTRY>`: Search data by date and country <br>
-`/data?place=<PROVINCE>`: Search data in province level <br>
-`/data?date=<YYYY-MM-DD>&place=<PROVINCE>`: Search data by date and province <br>
-
-### All countries and provinces list
-The full countries and provinces list in in `/list`, however, as the data is keep updating, run those 2 js scripts eg. `node country.js` can generate a new list. 
-
-<b>Be aware</b><br>
-China Mainland == Mainland China <br>
-PRC Hong Kong == Hong Kong <br>
-PRC Macau == Macau <br>
-ROC Taiwan (China) == Taiwan <br>
-
-
-
-Standard date format: YYYY-MM-DD
-
 # Dataset
 Thanks for Johns Hopkins CSSE provide this dataset. They are doing a great job.<br>
 https://github.com/CSSEGISandData/COVID-19
-
-# Public API
-[WORKING ON IT]
 
 # Notice
 1. NodeJs is just for better performance, and why I use python is just because I want to learn it. Whether data collection or api server, both parts can be done with either Python or NodeJs. As I am a UX designer, it's just for fun.
