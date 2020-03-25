@@ -1,0 +1,16 @@
+{
+  "name": "gssedata",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ali-mysql-client": "^1.0.3",
+    "express": "^4.17.1"
+  }
+}

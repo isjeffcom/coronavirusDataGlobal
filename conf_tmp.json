@@ -1,0 +1,7 @@
+{
+    "host": "localhost",
+    "user": "corona",
+    "password": "123321",
+    "db": "corona_global",
+    "port": "3306"
+}
