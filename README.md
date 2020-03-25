@@ -7,13 +7,6 @@ Coronavirus Global Data Collector and API
 This is sub-project for better understanding, analysis and visualize COVID-19 data in the UK.
 Main Project: https://github.com/isjeffcom/coronvirusFigureUK
 
-# Dataset
-Thanks for Johns Hopkins CSSE provide this dataset. They are doing a great job.
-https://github.com/CSSEGISandData/COVID-19
-
-# Public API
-[WORKING ON IT]
-
 # Important
 The data collection code in init.py -> main() needs to fit the CSV data format published by JH CSSE. As they have changed data format for 3 times, and maybe more for the future. The script needs to constantly monitor and change if any changed. 
 
@@ -30,6 +23,13 @@ That's it, you have global covid-19 data in your database `history` table
 ### API
 5. Install NodeJs
 6. Excute `npm i && npm run dev` to start up API server
+
+# Dataset
+Thanks for Johns Hopkins CSSE provide this dataset. They are doing a great job.
+https://github.com/CSSEGISandData/COVID-19
+
+# Public API
+[WORKING ON IT]
 
 # Notice
 1. The reason to use NodeJs is for better server performance, and the reason why I use python is just because I want to learn it. Whether data collection or api server, both parts can use either Python or NodeJs. As I am a UX designer, it's just for fun.
