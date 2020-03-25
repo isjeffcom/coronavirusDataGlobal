@@ -34,6 +34,13 @@ ROC Taiwan (China) == Taiwan <br>
 # Important
 The data collection code in init.py -> main() needs to fit the CSV data format published by JH CSSE. As they have changed data format for 3 times, and maybe more for the future. The script needs to constantly monitor and change if any changed. 
 
+### API USAGE NOTICE
+There are not much access barriers for this public API. The only thing I ask for is: <br>
+
+<b>PLEASE</b> do not attack or harm the server as this is not build for profit, it's for people to obtain and understand information<br> 
+<b>PLEASE</b> be careful when you testing this API in your product as it could be potentially create damage<br> 
+<b>PLEASE</b> make sure you have cached data on your side if you are building a product to customer as this API is not guaranteed 24/7 stable.<br>
+
 # Getting Started
 
 ### Data
