@@ -1,5 +1,4 @@
 // Databases
-const conf = require('./conf')
 var fs = require('fs')
 const DbClient = require("ali-mysql-client")
 
@@ -59,6 +58,22 @@ async function byCountry(country){
 
 }
 
+async function byPlace(place){
+
+    const result = await db
+    .select("*")
+    .from("history")
+    .where("province_state", place)
+    .queryList()
+
+    if(result){
+        return { status: true, data: result}
+    } else {
+        return { status: false, data: null, err: result }
+    }
+
+}
+
 async function byDateCountry(date, country){
 
     const result = await db
@@ -66,6 +81,23 @@ async function byDateCountry(date, country){
     .from("history")
     .where("last_update", date)
     .where("country_region", country)
+    .queryList()
+
+    if(result){
+        return { status: true, data: result}
+    } else {
+        return { status: false, data: null, err: result }
+    }
+
+}
+
+async function byDatePlace(date, place){
+
+    const result = await db
+    .select("*")
+    .from("history")
+    .where("last_update", date)
+    .where("province_state", place)
     .queryList()
 
     if(result){
@@ -90,5 +122,7 @@ module.exports = {
     latest: latest,
     byDate: byDate,
     byCountry: byCountry,
-    byDateCountry: byDateCountry
+    byPlace: byPlace,
+    byDateCountry: byDateCountry,
+    byDatePlace: byDatePlace
 }
