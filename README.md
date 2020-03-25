@@ -18,7 +18,7 @@ The data collection code in init.py -> main() needs to fit the CSV data format p
 3. Rename `conf_tmp.json` to `conf.json` and config your database
 4. Excute `python init.py`
 
-That's it, you have global covid-19 data in your database `history` table
+That's it, you have global covid-19 data in your database `history` table and cached in `/data` folder as JSON format
 
 ### API
 5. Install NodeJs
