@@ -39,10 +39,10 @@ The server will running at: `http://localhost:8003`
 The full countries and provinces list in in `/list`, however, as the data is keep updating, run those 2 js script eg. `node country.js` can generate a new list. 
 
 <b>Be aware</b>
-China Mainland == Mainland China
-PRC Hong Kong == Hong Kong
-PRC Macau == Macau
-ROC Taiwan (China) == Taiwan
+China Mainland == Mainland China <br>
+PRC Hong Kong == Hong Kong <br>
+PRC Macau == Macau <br>
+ROC Taiwan (China) == Taiwan <br>
 
 
 
