@@ -2,9 +2,9 @@
 
 <img src="https://i.ibb.co/1Mb9Df8/covid19global.png" alt="covid-19 global update" width="40%">
 
-Coronavirus Global Data Collector and API
+Coronavirus Global Data Collector and API<br>
 
-This is sub-project for better understanding, analysis and visualize COVID-19 data in the UK.
+This is sub-project for better understanding, analysis and visualize COVID-19 data in the UK.<br>
 Main Project: https://github.com/isjeffcom/coronvirusFigureUK
 
 # Important
@@ -38,7 +38,7 @@ The server will running at: `http://localhost:8003`
 ### All countries and provinces list
 The full countries and provinces list in in `/list`, however, as the data is keep updating, run those 2 js script eg. `node country.js` can generate a new list. 
 
-<b>Be aware</b>
+<b>Be aware</b><br>
 China Mainland == Mainland China <br>
 PRC Hong Kong == Hong Kong <br>
 PRC Macau == Macau <br>
@@ -49,7 +49,7 @@ ROC Taiwan (China) == Taiwan <br>
 Standard date format: YYYY-MM-DD
 
 # Dataset
-Thanks for Johns Hopkins CSSE provide this dataset. They are doing a great job.
+Thanks for Johns Hopkins CSSE provide this dataset. They are doing a great job.<br>
 https://github.com/CSSEGISandData/COVID-19
 
 # Public API
