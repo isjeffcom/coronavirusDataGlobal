@@ -36,10 +36,10 @@ You can set up a timer for this by `corn` or `node-schedule`, maybe any, once a 
 `/`: Default api, output cached data from data/data.json <br>
 `/current`: Get Latest Global Data <br>
 `/data?date=<YYYY-MM-DD>`: Search data by date <br>
-`/data?country=<country name>`: Search data in country level <br>
-`/data?date=<YYYY-MM-DD>&country=<country name>`: Search data by date and country <br>
-`/data?place=<province or state>`: Search data in province level <br>
-`/data?date=<YYYY-MM-DD>&place=<province or state>`: Search data in province level <br>
+`/data?country=<COUNTRY>`: Search data in country level <br>
+`/data?date=<YYYY-MM-DD>&country=<COUNTRY>`: Search data by date and country <br>
+`/data?place=<PROVINCE>`: Search data in province level <br>
+`/data?date=<YYYY-MM-DD>&place=<PROVINCE>`: Search data by date and province <br>
 
 ### All countries and provinces list
 The full countries and provinces list in in `/list`, however, as the data is keep updating, run those 2 js scripts eg. `node country.js` can generate a new list. 
