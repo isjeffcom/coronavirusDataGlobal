@@ -62,7 +62,7 @@ https://github.com/CSSEGISandData/COVID-19
 [WORKING ON IT]
 
 # Notice
-1. The reason to use NodeJs is for better server performance, and the reason why I use python is just because I want to learn it. Whether data collection or api server, both parts can use either Python or NodeJs. As I am a UX designer, it's just for fun.
+1. NodeJs is just for better performance, and why I use python is just because I want to learn it. Whether data collection or api server, both parts can be done with either Python or NodeJs. As I am a UX designer, it's just for fun.
 2. You can use NodeJs to excute python update by a function I placed in index.js call forceUpdate(). 
 3. If you don't want to install NodeJs, use python to start a server is not a hard thing to do.
 4. My Sql is not really needed, you can use any technology to storage data
