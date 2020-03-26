@@ -23,13 +23,18 @@ http://global.covid19uk.live
 Standard date format: YYYY-MM-DD
 
 ### Countries and Provinces list
-The full countries and provinces list in in `/list`, however, as the data is keep updating, run those 2 js scripts eg. `node country.js` can generate a new list. 
+The full countries and provinces list in in `/list`, however, as the data is keep updating, run those 2 JS scripts eg. `node country.js` can generate a new list. 
 
 <b>Be aware</b><br>
-China Mainland == Mainland China <br>
-PRC Hong Kong == Hong Kong <br>
-PRC Macau == Macau <br>
-ROC Taiwan (China) == Taiwan <br>
+`Mainland China` === China Mainland <br>
+`Hong Kong` === PRC Hong Kong <br>
+`Macau` === PRC Macau <br>
+`Taiwan` === ROC Taiwan (China) <br>
+
+### The UK
+use `UK` for early UK data
+use `United Kingdom` for later UK data
+
 
 # Important
 The data collection code in init.py -> main() needs to fit the CSV data format published by JH CSSE. As they have changed data format for 3 times, and maybe more for the future. The script needs to constantly monitor and change if any changed. 
