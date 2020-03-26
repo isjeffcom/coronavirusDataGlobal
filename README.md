@@ -74,9 +74,9 @@ https://github.com/CSSEGISandData/COVID-19
 You can use NodeJs to excute python update by a function I placed in index.js call forceUpdate(). 
 
 # Partnered Projects
-UK API: https://github.com/isjeffcom/coronvirusFigureUK
-Global API: https://github.com/isjeffcom/coronavirusDataGlobal
-ML Prediction: https://github.com/lamharrison/coronavirus-machine-learning
+UK API: https://github.com/isjeffcom/coronvirusFigureUK <br>
+Global API: https://github.com/isjeffcom/coronavirusDataGlobal <br>
+ML Prediction: https://github.com/lamharrison/coronavirus-machine-learning <br>
 
 # Contact
 If you are using this API, please join this discussion board. Keep updated for any significant changes!! <br>
