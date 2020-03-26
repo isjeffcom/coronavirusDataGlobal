@@ -75,3 +75,15 @@ https://github.com/CSSEGISandData/COVID-19
 2. You can use NodeJs to excute python update by a function I placed in index.js call forceUpdate(). 
 3. If you don't want to install NodeJs, use python to start a server is not a hard thing to do.
 4. My Sql is not really needed, you can use any technology to storage data
+
+## Contact
+If you are using this API, please join this discussion board. Keep updated for any significant changes!! <br>
+https://spectrum.chat/covid-19-uk-update
+<br><br>
+WeChat Group:<br>
+<img src="https://i.ibb.co/WtrbwVY/nn.jpg" width="20%">
+
+https://isjeff.com
+hello@isjeff.com
+
+
