@@ -1,8 +1,8 @@
-# COVID-19 Global Data API
+# COVID-19 Global History Data API
 
 <img src="https://i.ibb.co/1Mb9Df8/covid19global.png" alt="covid-19 global update" width="40%">
 
-Coronavirus Global Data Collector and API<br>
+Coronavirus Global History Data Collector and API<br>
 
 This is sub-project for better understanding, analysis and visualize COVID-19 data in the UK.<br>
 Main Project: https://github.com/isjeffcom/coronvirusFigureUK
