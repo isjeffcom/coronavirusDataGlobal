@@ -26,12 +26,47 @@ async function latest(){
     }
 }
 
+// Get latest
+async function status(){
+
+    let res = {
+        confirmed: 0,
+        death: 0,
+        recovered: 0
+    }
+
+    // This part is slow
+    const c = await db
+    .select("last_update")
+    .from("history")
+    .orderby("last_update desc")
+    .queryRow()
+
+    let d = await byDate(c.last_update)
+    d = d.data
+
+    for(let i=0;i<d.length;i++){
+        
+        res.confirmed = res.confirmed + d[i].confirmed
+        res.death = res.death + d[i].death
+        res.recovered = res.recovered + d[i].recovered
+    }
+
+    if(res){
+        return { status: true, data: res}
+    } else {
+        return { status: false, data: null, err: res }
+    }
+}
+
+
 async function byDate(date){
 
     const result = await db
     .select("*")
     .from("history")
     .where("last_update", date)
+    .orderby("last_update desc")
     .queryList()
 
     if(result){
@@ -48,6 +83,7 @@ async function byCountry(country){
     .select("*")
     .from("history")
     .where("country_region", country)
+    .orderby("last_update desc")
     .queryList()
 
     if(result){
@@ -64,6 +100,7 @@ async function byPlace(place){
     .select("*")
     .from("history")
     .where("province_state", place)
+    .orderby("last_update desc")
     .queryList()
 
     if(result){
@@ -81,6 +118,7 @@ async function byDateCountry(date, country){
     .from("history")
     .where("last_update", date)
     .where("country_region", country)
+    .orderby("last_update desc")
     .queryList()
 
     if(result){
@@ -98,12 +136,51 @@ async function byDatePlace(date, place){
     .from("history")
     .where("last_update", date)
     .where("province_state", place)
+    .orderby("last_update desc")
     .queryList()
 
     if(result){
         return { status: true, data: result}
     } else {
         return { status: false, data: null, err: result }
+    }
+
+}
+
+async function majorEU(){
+
+    const italy = await db
+    .select("*")
+    .from("history")
+    .where("country_region", "Italy")
+    .orderby("last_update asc")
+    .queryList()
+
+    const germany = await db
+    .select("*")
+    .from("history")
+    .where("country_region", "Germany")
+    .orderby("last_update asc")
+    .queryList()
+
+    const france = await db
+    .select("*")
+    .from("history")
+    .where("country_region", "France")
+    .orderby("last_update asc")
+    .queryList()
+
+    const spain = await db
+    .select("*")
+    .from("history")
+    .where("country_region", "Spain")
+    .orderby("last_update asc")
+    .queryList()
+
+    if(italy && germany && france && spain){
+        return { status: true, data: { Italy: italy, Germany: germany, France: france, Spain: spain }}
+    } else {
+        return { status: false, data: null, err: "err" }
     }
 
 }
@@ -120,9 +197,11 @@ function addZero(str){
 
 module.exports = {
     latest: latest,
+    status: status,
     byDate: byDate,
     byCountry: byCountry,
     byPlace: byPlace,
     byDateCountry: byDateCountry,
-    byDatePlace: byDatePlace
+    byDatePlace: byDatePlace,
+    majorEU: majorEU
 }

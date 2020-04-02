@@ -44,8 +44,12 @@ const schedule = require('node-schedule-tz')
  * ROC Taiwan == Taiwan
  * 
 **/
+
+var currentCacheTime = 0
+var statusCacheTime = 0
 var placeCacheTime = 0
 var countryCacheTime = 0
+var euCacheTime = 0
 
 let cachePath = './data/cache/'
 
@@ -77,15 +81,34 @@ let server = app.listen(8003, function () {
 
 // Current
 app.get('/current', async (req, res) => {
-
+    fn = "current"
     // Get file cache if exists
-    if(checkFileCache('current')){
-        const stream = fs.createReadStream(path.join(__dirname, cachePath + 'current' + '.json'))
+    if(checkFileCache(fn) && checkCacheTime(currentCacheTime)){
+        const stream = fs.createReadStream(path.join(__dirname, cachePath + fn + '.json'))
         stream.pipe(res)
     } else {
         const data = await database.latest()
         res.send(data)
-        writeFileCache('current', data)
+        if(data.data.length > 0){
+            writeFileCache(fn, data)
+        }
+    }
+    
+})
+
+// Current
+app.get('/status', async (req, res) => {
+
+    fn = "status"
+    
+    // Get file cache if exists
+    if(checkFileCache(fn) && checkCacheTime(statusCacheTime)){
+        const stream = fs.createReadStream(path.join(__dirname, cachePath + fn + '.json'))
+        stream.pipe(res)
+    } else {
+        const data = await database.status()
+        res.send(data)
+        writeFileCache(fn, data)
     }
     
 })
@@ -112,7 +135,10 @@ app.get('/data', async (req, res) => {
         } else {
             const data = await database.byDateCountry(queryDate, req.query.country)
             res.send(data)
-            writeFileCache(fn, data)
+            if(data.data.length > 0){
+                writeFileCache(fn, data)
+            }
+            
         }
     }
 
@@ -125,7 +151,9 @@ app.get('/data', async (req, res) => {
         } else {
             const data = await database.byDatePlace(queryDate, req.query.place)
             res.send(data)
-            writeFileCache(fn, data)
+            if(data.data.length > 0){
+                writeFileCache(fn, data)
+            }
         }
     }
 
@@ -154,7 +182,9 @@ app.get('/data', async (req, res) => {
         } else {
             const data = await database.byPlace(req.query.place)
             res.send(data)
-            writeFileCache(fn, data)
+            if(data.data.length > 0){
+                writeFileCache(fn, data)
+            }
 
             // Save Cache Time
             placeCacheTime = Date.parse( new Date())
@@ -172,7 +202,9 @@ app.get('/data', async (req, res) => {
         } else {
             const data = await database.byCountry(req.query.country)
             res.send(data)
-            writeFileCache(fn, data)
+            if(data.data.length > 0){
+                writeFileCache(fn, data)
+            }
 
             // Save Cache Time
             countryCacheTime = Date.parse( new Date())
@@ -184,6 +216,24 @@ app.get('/data', async (req, res) => {
         res.send("No Query Parameters")
     }
     
+})
+
+
+// Private (no access-control) for COVID19UK.LIVE
+app.get('/majoreu', async (req, res) => {
+    let fn = 'marjoyeu'
+
+    if(checkFileCache(fn) && checkCacheTime(euCacheTime)){
+        const stream = fs.createReadStream(path.join(__dirname, cachePath + fn + '.json'))
+        stream.pipe(res)
+    } else {
+        const data = await database.majorEU()
+        res.send(data)
+        writeFileCache(fn, data)
+
+        // Save Cache Time
+        euCacheTime = Date.parse( new Date())
+    }
 })
 
 function onCreate(){
