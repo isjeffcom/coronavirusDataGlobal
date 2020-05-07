@@ -19,6 +19,15 @@ const database = require('./database')
 // Node Schedule
 const schedule = require('node-schedule-tz')
 
+// Axios Request
+const request = require('./request')
+
+// Mapbox API and token
+const DBconf = JSON.parse(fs.readFileSync('./conf.json', 'utf8'))
+const mapboxAPI = DBconf.mapbox_api
+const mapboxToken = DBconf.mapbox_token
+
+
 // Redis Fast Cache
 //const redis = require("redis")
 //const redisClient = redis.createClient()
@@ -50,6 +59,7 @@ var statusCacheTime = 0
 var placeCacheTime = 0
 var countryCacheTime = 0
 var euCacheTime = 0
+var realtimeCache = 0
 
 let cachePath = './data/cache/'
 
@@ -236,8 +246,98 @@ app.get('/majoreu', async (req, res) => {
     }
 })
 
+// Private (no access-control) for COVID19UK.LIVE
+app.get('/realtime', async (req, res) => {
+    let fn = 'realtime'
+
+    if(checkFileCache(fn) && checkCacheTime(realtimeCache, 10*60*1000)){
+
+        const stream = fs.createReadStream(path.join(__dirname, cachePath + fn + '.json'))
+        stream.pipe(res)
+
+    } else {
+        request.genGet("https://api.covid19api.com/summary", [], async (response)=>{
+            let result = response.data
+
+            // Add Geo Location
+            let pRes = await kGeo(result)
+            res.send(pRes)
+            writeFileCache(fn, pRes)
+
+            // Cache new geo location to DB
+            saveGeo(result.Countries)
+        })
+
+        // Save Cache Time
+        realtimeCache = Date.parse( new Date())
+    }
+})
+
 function onCreate(){
    // Do nothing...
+}
+
+async function saveGeo(data){
+    
+    let geo = await database.geo()
+    if(geo){
+
+        data.forEach(async el => {
+          // If doesnt exist
+          if(util.idIdxsInArrWithId(el.Country, geo.data, 'name') == -1){
+    
+            let loca = encodeURI(el.Country)
+            
+            await request.genGet(mapboxAPI+ loca +".json", [{name: "access_token", val: mapboxToken}], (res)=>{
+              
+              if(res.status){
+                let center = res.data.features[0].center
+                
+                let ready = {
+                  name: el.Country,
+                  lo: center[0],
+                  la: center[1]
+                }
+      
+                database.addGeo(ready)
+    
+              }
+            })
+          }
+        })
+      }
+}
+
+async function kGeo(data){
+
+    let all = await database.geo()
+    let res = data
+
+    for(let i=0;i<res.Countries.length;i++){
+        
+        let geo = await matchGeo(res.Countries[i].Country, all.data)
+        //console.log(geo)
+        if(geo){
+            res.Countries[i].la = geo.la
+            res.Countries[i].lo = geo.lo
+        } else {
+            res.Countries[i].la = null
+            res.Countries[i].lo = null
+        }
+    }
+
+    return res
+}
+
+async function matchGeo(name, geo){
+
+    for(let i=0;i<geo.length;i++){
+        if(name == geo[i].name){
+            return {lo: geo[i].lo, la: geo[i].la}
+        }
+    }
+
+    return false
 }
 
 // Call for update from nodejs
@@ -270,14 +370,18 @@ function writeFileCache(name, data){
       })
 }
 
-function checkCacheTime(ts){
+function checkCacheTime(ts, limit){
 
     if(ts == 0){
         return false
     }
 
+    if(!limit){
+        limit = 3 * 60 * 60 * 1000
+    }
+
     const current = Date.parse( new Date())
-    if(current > (ts + (6 * 60 * 60 * 1000))){
+    if(current > (ts + limit)){
         return false
     } else {
         return true

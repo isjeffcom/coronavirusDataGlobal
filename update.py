@@ -55,12 +55,10 @@ def getLatestInDB():
     try:
         with connection.cursor() as cursor:
             # Create a new record
-            sql = "SELECT `last_update` FROM `history` ORDER BY `last_update` DESC"
+            sql = "SELECT `last_update` FROM `history` ORDER BY `last_update` DESC LIMIT 1"
             cursor.execute(sql)
             result = cursor.fetchone()
             return result['last_update']
-
-            
 
         # connection is not autocommit by default. So you must commit to save
         # your changes.
@@ -131,7 +129,7 @@ if last == current:
     print("no need for update")
 else:
     print("update needed")
-    with open(path+"/"+current+'.csv') as csv_file:
+    '''with open(path+"/"+current+'.csv') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
 
         line_count = 0
@@ -149,4 +147,4 @@ else:
                 output.append(constData(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11]))
             
         
-        createCache(output, thisUpdate)
+        createCache(output, thisUpdate)'''

@@ -23,7 +23,22 @@ function getRetSymbol(){
     return ret
 }
 
+// Id index in array object, output all index as an array
+function idIdxsInArrWithId(target, arr, id){
+    
+    var res = []
+    for(let i=0;i<arr.length;i++){
+        if(arr[i][id].indexOf(target) != -1){
+            res.push(i)
+        }
+    }
+
+    
+    return res.length > 0 ? res : -1
+}
+
 module.exports = {
     dcUS2Globe: dcUS2Globe,
-    getRetSymbol: getRetSymbol
+    getRetSymbol: getRetSymbol,
+    idIdxsInArrWithId: idIdxsInArrWithId
 }

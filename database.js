@@ -76,6 +76,28 @@ async function byDate(date){
     }
 }
 
+async function geo(){
+
+    const result = await db
+    .select("*")
+    .from("geo")
+    .queryList()
+
+    if(result){
+        return { status: true, data: result}
+    } else {
+        return { status: false, data: null, err: result }
+    }
+}
+
+async function addGeo(ready){
+    const save = await db
+        .insert("geo", ready)
+        .execute()
+
+    return save ? { status: true, data: null} : { status: false, data: null, err: save }
+}
+
 
 async function byCountry(country){
 
@@ -203,5 +225,7 @@ module.exports = {
     byPlace: byPlace,
     byDateCountry: byDateCountry,
     byDatePlace: byDatePlace,
-    majorEU: majorEU
+    majorEU: majorEU,
+    geo: geo,
+    addGeo: addGeo
 }

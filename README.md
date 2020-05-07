@@ -13,7 +13,8 @@ HTTP GET:
 http://global.covid19uk.live
 
 ### Parameter
-`/current`: Get Latest Global Data <br>
+`/realtime`: Get Real Time Data
+`/current`: Get Saved Global Data (1 Day Delay) <br>
 `/data?date=<YYYY-MM-DD>`: Search data by date <br>
 `/data?country=<COUNTRY>`: Search data in country level <br>
 `/data?date=<YYYY-MM-DD>&country=<COUNTRY>`: Search data by date and country <br>
@@ -31,7 +32,7 @@ The full countries and provinces list in in `/list`, however, as the data is kee
 `Macau` === PRC Macau <br>
 `Taiwan` === ROC Taiwan (China) <br>
 
-### The UK
+### United Kingdom
 use `UK` for early UK data
 use `United Kingdom` for later UK data
 
