@@ -13,7 +13,7 @@ HTTP GET:
 http://global.covid19uk.live
 
 ### Parameter
-`/realtime`: Get Real Time Data
+`/realtime`: Get Real Time Data (provided by https://covid19api.com/)
 `/current`: Get Saved Global Data (1 Day Delay) <br>
 `/data?date=<YYYY-MM-DD>`: Search data by date <br>
 `/data?country=<COUNTRY>`: Search data in country level <br>
