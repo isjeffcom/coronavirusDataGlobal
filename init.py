@@ -39,7 +39,6 @@ if not os.path.exists('./data'):
 # file path
 files = os.listdir(dataPath)
 
-
 # get database config
 with open('./conf.json') as f:
     db_conf = json.load(f)
